@@ -1,0 +1,141 @@
+<!-- 
+  <mat-card class="my-card" #signupForm>
+    <mat-toolbar style="background-color:#06B5D3;">
+       <p>Registration</p>
+    </mat-toolbar>
+       <mat-card-content>
+          <form class="my-form">
+             <mat-form-field class="full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First name (not more than 14 characters)" [formControl]="FirstName" required minlength="3" maxlength="14">
+                <mat-error *ngIf="FirstName.invalid">{{getErrorFnameMessage()}}</mat-error>
+             </mat-form-field>
+             <mat-form-field class="full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name" [formControl]="LastName">
+             </mat-form-field>
+             <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="email" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+             </mat-form-field>
+  
+             <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" placeholder="Password(Min lenght of 8)" [formControl]="password" minlength="8" maxlength="15">
+                <mat-error *ngIf="password.invalid">{{getpassErrorMessage()}}</mat-error>
+             </mat-form-field>
+             <mat-form-field class="full-width">
+                <mat-label>ConfirmPassword</mat-label>
+                <input matInput type="password" placeholder="Confirm New Password" [formControl]="confirm" required>
+             </mat-form-field>
+             <mat-label *ngIf=confirm.value class="password">{{getconfirmErrorMessage()}}</mat-label>
+             <mat-form-field class="full-width">
+                <mat-label>Interests</mat-label>
+                <mat-select placeholder="Toppings" [formControl]="toppings" multiple>
+                   <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                </mat-select>
+             </mat-form-field>
+       <mat-card-actions>
+          <button mat-raised-button *ngIf="password.value!=confirm.value" [disabled]='true' (click)="register()" color="primary">Register</button>
+          <button mat-raised-button *ngIf="password.value==confirm.value" (click)="register()" color="primary" enabled>Register</button>
+          <button mat-raised-button (click)="backToLogin()" color="primary">Cancel</button>
+       </mat-card-actions>
+    </form>
+     </mat-card-content>
+    </mat-card> -->
+
+
+    <div class="height1">
+      <br>
+         <p>Registration</p>
+       </div>
+          <mat-horizontal-stepper linear #stepper class="height" >
+
+
+            <mat-step [stepControl]="firstFormGroup" >
+                      <form [formGroup]="firstFormGroup" class="form" >
+                        <ng-template matStepLabel>About</ng-template>
+                        <br>
+                        <br>
+                        <mat-form-field labelPosition="top">
+                           
+                          <input matInput placeholder="First Name" formControlName="FirstName" required>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                         
+                           <input matInput placeholder="Last Name" formControlName="LastName" required>
+                         </mat-form-field>
+                        <div>
+                          <button mat-button matStepperNext  class="btn">Next</button>
+                          <!-- <button mat-button matStepperNext  class="btn1" routerLink="/register">Cancel</button> -->
+
+                        </div>
+                      </form>
+                    </mat-step> 
+                
+       
+             <mat-step [stepControl]="secondFormGroup"  >
+               <form [formGroup]="secondFormGroup"  class="form" >
+                 <ng-template matStepLabel>Details</ng-template>
+                 <br>
+                 <br>
+                 <mat-form-field>
+                   <input matInput placeholder="Email" formControlName="email" required>
+                 </mat-form-field>
+                 <br>
+                 <mat-form-field>
+                    <input type="password" matInput placeholder="Password(Min lenght 8)" formControlName="password" minlength="8">
+                  </mat-form-field>
+                  <br>
+                
+                  <br>
+                 <div>
+                   <button mat-button matStepperPrevious class="btn">Back</button>
+                   <button mat-button matStepperNext class="btn1">Next</button>
+                 </div>
+               </form>
+             </mat-step>
+       
+             <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional" >
+                   <form [formGroup]="thirdFormGroup" class="form">
+                     <ng-template matStepLabel>Interest</ng-template>
+                     <br>
+                     <br>
+                      <mat-form-field >
+                            <mat-select  placeholder="Topics" formControlName="toppings" multiple>
+                               <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                            </mat-select>
+                         </mat-form-field>
+                         <br>
+                         <br>
+                         <br>
+                     <div>
+                       <button mat-button matStepperPrevious class="btn">Back</button>
+                       <button mat-button matStepperNext class="btn1">Next</button>
+                     </div>
+                   </form>
+                 </mat-step>
+       
+                 <mat-step  >
+                      <ng-template matStepLabel>Final Step</ng-template>
+                      <div class="form1">
+                       
+                         <br>
+                      Click Register to complete the registration!! 
+                   </div>
+                       
+                         <br>
+                         <br>
+                      <div>
+                            <button mat-button matStepperPrevious class="btn2">Back</button>
+                            <button mat-button class="btn3" (click)="stepper.reset()">Reset</button>
+                      </div>
+                      <br>
+                   
+                      <div>
+                        <button mat-raised-button  (click)="register()" color="primary" class="reg">Register</button>
+                      </div>
+                    </mat-step> 
+              </mat-horizontal-stepper>
